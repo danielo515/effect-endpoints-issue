@@ -1,18 +1,6 @@
-# Welcome to React Router!
+# React Router with Effect Endpoints issue reproduction
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+![issue happening](<Screenshot 2025-11-08 at 22.24.39.png>)
 
 ## Getting Started
 
@@ -21,7 +9,7 @@ A modern, production-ready template for building full-stack React applications u
 Install the dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Development
@@ -29,59 +17,20 @@ npm install
 Start the development server with HMR:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Your application will be available at `http://localhost:5173`.
 
-## Building for Production
+## Issue description
 
-Create a production build:
+When you modify any service and HMR does the module replacement, if you reload any page using the effect endpoints you get the error shown in the screenshot.
 
-```bash
-npm run build
-```
+for example:
 
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+1. Start the development server
+2. Open any page using the effect endpoints, for example `http://localhost:5173/api/images/test-id`
+3. Modify `lib/api/service.ts`. For example change the `organizationId` to `organizationId2`
+4. HMR does the module replacement
+5. Reload any page using the effect endpoints, for example `http://localhost:5173/api/images/test-id`
+6. You get the error shown in the screenshot

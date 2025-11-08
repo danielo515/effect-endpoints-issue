@@ -9,7 +9,7 @@ export const SessionMiddlewareLive = Layer.effect(
       const req = yield* HttpServerRequest;
       const headers = new Headers(req.headers);
 
-      return { session: { organizationId: undefined }, headers };
+      return { session: { organizationId: "this is the org id" }, headers };
     });
   })
 );
