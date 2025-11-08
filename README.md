@@ -30,7 +30,7 @@ for example:
 
 1. Start the development server
 2. Open any page using the effect endpoints, for example `http://localhost:5173/api/images/test-id`
-3. Modify `lib/api/service.ts`. For example change the `organizationId` to `organizationId2`
+3. Modify `lib/api/service.ts`. For example change the `organizationId` to `organizationId2`. It is better to alternate between `undefined` and a string value
 4. HMR does the module replacement
 5. Reload any page using the effect endpoints, for example `http://localhost:5173/api/images/test-id`
 6. You get the error shown in the screenshot
